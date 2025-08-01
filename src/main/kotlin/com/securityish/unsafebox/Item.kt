@@ -1,3 +1,5 @@
 package com.securityish.unsafebox
 
-data class Item(val id: Int, val description: String)
+import java.time.LocalDateTime
+
+data class Item(val id: Int, val description: String, val createdOn: LocalDateTime)
