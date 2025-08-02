@@ -1,37 +1,32 @@
 package com.securityish.unsafebox.service
 
+import com.securityish.unsafebox.RegisterRequest
 import com.securityish.unsafebox.UserRepository
-import com.securityish.unsafebox.UserValues
-import com.securityish.unsafebox.model.UserEntity
-import com.securityish.unsafebox.security.JwtUtils
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import com.securityish.unsafebox.entity.Role
+import com.securityish.unsafebox.entity.UserEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class UserService(
     private val userRepository: UserRepository,
-    private val passwordEncoder: PasswordEncoder,
-    private val authenticationManager: AuthenticationManager,
-    private val jwtUtils: JwtUtils
+    private val passwordEncoder: PasswordEncoder
 ) {
-    fun registerUser(user: UserValues): String {
-        if (userRepository.existsByUsername(user.username)) {
-            return "Username already exists"
-        }
-        val user = UserEntity(
-            username = user.username.trim(),
-            password = passwordEncoder.encode(user.password.trim())
-        )
-        userRepository.save(user)
-        return "User registered successfully"
+    fun existsByUsername(username: String): Boolean {
+        return userRepository.existsByUsername(username)
     }
 
-    fun loginUser(user: UserValues): String {
-        val auth = UsernamePasswordAuthenticationToken(user.username, user.password)
-        authenticationManager.authenticate(auth)
-        val token = jwtUtils.generateToken(user.username, "USER") // Assuming role is USER for simplicity
-        return token
+    fun existsByEmail(email: String): Boolean {
+        return userRepository.existsByEmail(email)
+    }
+
+    fun createUser(registerRequest: RegisterRequest): UserEntity {
+        val user = UserEntity(
+            username = registerRequest.username,
+            password = passwordEncoder.encode(registerRequest.password),
+            email = registerRequest.email,
+            role = Role.USER
+        )
+        return userRepository.save(user)
     }
 }

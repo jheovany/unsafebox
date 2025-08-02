@@ -1,10 +1,9 @@
 package com.securityish.unsafebox
 
-import com.securityish.unsafebox.model.ItemEntity
-import com.securityish.unsafebox.model.SafeBoxEntity
-import com.securityish.unsafebox.model.UserEntity
+import com.securityish.unsafebox.entity.ItemEntity
+import com.securityish.unsafebox.entity.SafeBoxEntity
+import com.securityish.unsafebox.entity.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
-import java.util.Optional
 import java.util.UUID
 
 interface SafeBoxRepository : JpaRepository<SafeBoxEntity, UUID>
@@ -14,6 +13,7 @@ interface ItemRepository : JpaRepository<ItemEntity, Int> {
 }
 
 interface UserRepository : JpaRepository<UserEntity, Long> {
-    fun findByUsername(username: String): Optional<UserEntity>
+    fun findByUsername(username: String): UserEntity?
     fun existsByUsername(username: String): Boolean
+    fun existsByEmail(email: String): Boolean
 }

@@ -5,8 +5,8 @@ import com.securityish.unsafebox.ItemRepository
 import com.securityish.unsafebox.SafeBoxId
 import com.securityish.unsafebox.SafeBoxRepository
 import com.securityish.unsafebox.SafeBoxValues
-import com.securityish.unsafebox.model.ItemEntity
-import com.securityish.unsafebox.model.SafeBoxEntity
+import com.securityish.unsafebox.entity.ItemEntity
+import com.securityish.unsafebox.entity.SafeBoxEntity
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.util.UUID

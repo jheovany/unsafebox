@@ -1,4 +1,4 @@
-package com.securityish.unsafebox.model
+package com.securityish.unsafebox.entity
 
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
