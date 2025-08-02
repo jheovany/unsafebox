@@ -14,19 +14,14 @@ class JwtUtils(
     private val key = Keys.hmacShaKeyFor(jwtSecret.toByteArray())
 
     fun generateToken(username: String, role: String): String {
-        val claims = mutableMapOf<String, Any>(
-            "role" to role
-        )
-
         return Jwts.builder()
             .setSubject(username)
-            .setClaims(claims)
+            .claim("role", role)
             .setIssuedAt(Date())
             .setExpiration(Date(System.currentTimeMillis() + jwtExpirationMs))
             .signWith(key)
             .compact()
     }
-
 
     fun getUsernameFromToken(token: String): String =
         Jwts.parserBuilder().setSigningKey(key).build()
