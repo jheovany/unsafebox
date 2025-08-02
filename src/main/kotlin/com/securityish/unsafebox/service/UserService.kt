@@ -31,7 +31,7 @@ class UserService(
     fun loginUser(user: UserValues): String {
         val auth = UsernamePasswordAuthenticationToken(user.username, user.password)
         authenticationManager.authenticate(auth)
-        val token = jwtUtils.generateToken(user.username)
+        val token = jwtUtils.generateToken(user.username, "USER") // Assuming role is USER for simplicity
         return token
     }
 }

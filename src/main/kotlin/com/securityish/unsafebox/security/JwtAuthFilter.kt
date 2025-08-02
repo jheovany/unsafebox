@@ -15,6 +15,7 @@ class JwtAuthFilter(
     private val jwtUtils: JwtUtils,
     private val userDetailsService: UserDetailsServiceImpl
 ) : OncePerRequestFilter() {
+
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,

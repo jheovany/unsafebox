@@ -5,6 +5,7 @@ import com.securityish.unsafebox.SafeBoxId
 import com.securityish.unsafebox.service.SafeBoxService
 import com.securityish.unsafebox.SafeBoxValues
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -18,6 +19,7 @@ import java.util.UUID
 @RestController
 @RequestMapping("/safeboxes")
 @Tag(name = "SafeBoxes")
+@SecurityRequirement(name = "BearerAuth")
 class SafeBoxController(private val safeBoxService: SafeBoxService) {
     @PostMapping
     @Operation(

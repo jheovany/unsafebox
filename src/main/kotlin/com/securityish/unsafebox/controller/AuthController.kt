@@ -3,8 +3,8 @@ package com.securityish.unsafebox.controller
 import com.securityish.unsafebox.UserValues
 import com.securityish.unsafebox.security.JwtUtils
 import com.securityish.unsafebox.service.UserService
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
