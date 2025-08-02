@@ -1,6 +1,14 @@
-package com.securityish.unsafebox
+package com.securityish.unsafebox.service
 
+import com.securityish.unsafebox.Item
+import com.securityish.unsafebox.ItemRepository
+import com.securityish.unsafebox.SafeBoxId
+import com.securityish.unsafebox.SafeBoxRepository
+import com.securityish.unsafebox.SafeBoxValues
+import com.securityish.unsafebox.model.ItemEntity
+import com.securityish.unsafebox.model.SafeBoxEntity
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 import java.util.UUID
 
 @Service
@@ -13,7 +21,7 @@ class SafeBoxService(
             id = UUID.randomUUID(),
             name = safeBoxValues.name,
             password = safeBoxValues.password,
-            createdOn = java.time.LocalDateTime.now()
+            createdOn = LocalDateTime.now()
         )
         val safeBoxEntity = safeBoxRepository.save(safeBox)
         return SafeBoxId(safeBoxEntity.id, safeBoxEntity.createdOn)
@@ -29,7 +37,7 @@ class SafeBoxService(
             val item = ItemEntity(
                 safeBox = safeBox,
                 description = desc,
-                createdOn = java.time.LocalDateTime.now()
+                createdOn = LocalDateTime.now()
             )
             items.add(item)
         }
@@ -42,7 +50,8 @@ class SafeBoxService(
     fun listItems(safeBoxId: UUID): List<Item> {
         val items = itemRepository.findAllBySafeBoxId(safeBoxId)
         return items.map {
-            it -> Item(it.id, it.description, it.createdOn)
+            it ->
+            Item(it.id, it.description, it.createdOn)
         }
     }
 }
